@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.opengroup.osdu</groupId>
+    <artifactId>os-indexer-queue-testing</artifactId>
+    <version>0.30.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <description>
+        Aggregator for the indexer-queue integration test modules. Exists so the shared
+        build-testing CI job (gated on testing/pom.xml at the repo root) fires and publishes
+        fresh test-module SNAPSHOTs to the Maven cache, preventing stale jars from surviving
+        across pipeline runs.
+    </description>
+
+    <modules>
+        <module>indexer-queue-azure-enqueue</module>
+    </modules>
+
+    <distributionManagement>
+        <repository>
+            <id>${publish.releases.id}</id>
+            <url>${publish.releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>${publish.snapshots.id}</id>
+            <url>${publish.snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>Default</id>
+            <activation>
+                <property>
+                    <name>!repo.releases.id</name>
+                </property>
+            </activation>
+            <properties>
+                <repo.releases.id>community-maven-repo</repo.releases.id>
+                <publish.snapshots.id>community-maven-via-job-token</publish.snapshots.id>
+                <publish.releases.id>community-maven-via-job-token</publish.releases.id>
+                <repo.releases.url>https://community.opengroup.org/api/v4/groups/17/-/packages/maven</repo.releases.url>
+                <publish.snapshots.url>https://community.opengroup.org/api/v4/projects/73/packages/maven</publish.snapshots.url>
+                <publish.releases.url>https://community.opengroup.org/api/v4/projects/73/packages/maven</publish.releases.url>
+            </properties>
+        </profile>
+    </profiles>
+</project>
