@@ -96,6 +96,7 @@ The following software have components provided under the terms of this license:
 - Apache Maven Shared Utils (from https://maven.apache.org/shared/, https://repo1.maven.org/maven2/org/apache/maven/shared/maven-shared-utils)
 - AssertJ Core (from https://assertj.github.io/doc/#assertj-core)
 - Asynchronous Http Client (from https://github.com/AsyncHttpClient/async-http-client, https://repo1.maven.org/maven2/org/asynchttpclient/async-http-client)
+- Asynchronous Http Client Netty Utils (from http://github.com/AsyncHttpClient/async-http-client, https://repo1.maven.org/maven2/org/asynchttpclient/async-http-client-netty-utils)
 - Awaitility (from http://awaitility.org/)
 - BSON (from http://bsonspec.org, https://bsonspec.org, https://bsonspec.org/)
 - BSON Record Codec (from <https://www.mongodb.com/>, https://bsonspec.org/, https://www.mongodb.com/)
@@ -171,14 +172,17 @@ The following software have components provided under the terms of this license:
 - MongoDB Java Driver (from http://mongodb.org/, http://www.mongodb.org, https://www.mongodb.com/)
 - Netty/Buffer (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-buffer)
 - Netty/Codec (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-codec)
+- Netty/Codec/Base (from https://netty.io/)
+- Netty/Codec/Compression (from https://netty.io/)
 - Netty/Codec/DNS (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-codec-dns)
 - Netty/Codec/HTTP (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-codec-http)
 - Netty/Codec/HTTP2 (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-codec-http2)
+- Netty/Codec/Marshalling (from https://netty.io/)
+- Netty/Codec/Protobuf (from https://netty.io/)
 - Netty/Codec/Socks (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-codec-socks)
 - Netty/Common (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-common)
 - Netty/Handler (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-handler)
 - Netty/Handler/Proxy (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-handler-proxy)
-- Netty/Incubator/Codec/Classes/Quic (from <https://repo1.maven.org/maven2/io/netty/incubator/netty-incubator-codec-classes-quic>, https://repo1.maven.org/maven2/io/netty/incubator/netty-incubator-codec-classes-quic)
 - Netty/Resolver (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-resolver)
 - Netty/Resolver/DNS (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-resolver-dns)
 - Netty/Resolver/DNS/Classes/MacOS (from https://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-resolver-dns-classes-macos)
@@ -188,6 +192,7 @@ The following software have components provided under the terms of this license:
 - Netty/Transport/Classes/Epoll (from https://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-transport-classes-epoll)
 - Netty/Transport/Classes/KQueue (from https://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-transport-classes-kqueue)
 - Netty/Transport/Native/Unix/Common (from https://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common)
+- Netty Reactive Streams Implementation (from https://repo1.maven.org/maven2/com/typesafe/netty/netty-reactive-streams)
 - Nimbus Content Type (from https://bitbucket.org/connect2id/nimbus-content-type)
 - Nimbus JOSE+JWT (from https://bitbucket.org/connect2id/nimbus-jose-jwt, https://bitbucket.org/nimbusds/nimbus-jose-jwt)
 - Nimbus LangTag (from https://bitbucket.org/connect2id/nimbus-language-tags)
@@ -208,7 +213,6 @@ The following software have components provided under the terms of this license:
 - PowerMock (from http://www.powermock.org, http://www.powermock.org/, https://repo1.maven.org/maven2/org/powermock/powermock-api-mockito)
 - Proton-J (from https://qpid.apache.org/proton, https://repo1.maven.org/maven2/org/apache/qpid/proton-j)
 - QDox (from https://github.com/paul-hammant/qdox)
-- QUIC functionality for the Reactor Netty library (from https://github.com/reactor/reactor-netty)
 - QpidJMS Client (from https://qpid.apache.org/, https://repo1.maven.org/maven2/org/apache/qpid/qpid-jms-client)
 - RESTEasy Client API (from https://resteasy.dev/)
 - RESTEasy Core (from https://resteasy.dev/)
@@ -298,6 +302,7 @@ The following software have components provided under the terms of this license:
 - org.xmlunit:xmlunit-core (from http://www.xmlunit.org/, https://www.xmlunit.org/)
 - resilience4j (from https://github.com/resilience4j/resilience4j, https://resilience4j.readme.io/, ttps://resilience4j.readme.io)
 - swagger-annotations (from https://github.com/swagger-api/swagger-core, https://repo1.maven.org/maven2/io/swagger/core/v3/swagger-annotations)
+- swagger-annotations-jakarta (from https://github.com/swagger-api/swagger-core)
 - swagger-core (from https://github.com/swagger-api/swagger-core, https://repo1.maven.org/maven2/io/swagger/core/v3/swagger-core)
 - swagger-jaxrs (from https://github.com/swagger-api/swagger-core, https://repo1.maven.org/maven2/io/swagger/swagger-jaxrs)
 - swagger-models (from https://github.com/swagger-api/swagger-core, https://repo1.maven.org/maven2/io/swagger/core/v3/swagger-models)
@@ -314,6 +319,7 @@ The following software have components provided under the terms of this license:
 - Apache Log4j Core (from https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core)
 - Hamcrest Core (from http://hamcrest.org/, http://hamcrest.org/JavaHamcrest/, https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core)
 - HdrHistogram (from http://hdrhistogram.github.io/HdrHistogram/)
+- Jackson-core (from http://wiki.fasterxml.com/JacksonHome, https://github.com/FasterXML/jackson-core)
 - Jodd Util (from https://util.jodd.org/)
 - LatencyUtils (from http://latencyutils.github.io/LatencyUtils/)
 - Lucene Core (from https://lucene.apache.org/, https://repo1.maven.org/maven2/org/apache/lucene/lucene-core)
@@ -348,6 +354,13 @@ The following software have components provided under the terms of this license:
 - Redisson (from http://redisson.org, https://redisson.pro/)
 - ReflectASM (from https://github.com/EsotericSoftware/reflectasm)
 - Spring Core (from http://www.springframework.org, https://github.com/spring-projects/spring-framework, https://repo1.maven.org/maven2/org/springframework/spring-core)
+
+========================================================================
+BSL-1.0
+========================================================================
+The following software have components provided under the terms of this license:
+
+- Jackson-core (from http://wiki.fasterxml.com/JacksonHome, https://github.com/FasterXML/jackson-core)
 
 ========================================================================
 BouncyCastle
@@ -390,6 +403,7 @@ The following software have components provided under the terms of this license:
 - JavaBeans Activation Framework (from <http://java.sun.com/javase/technologies/desktop/javabeans/jaf/index.jsp>, http://java.sun.com/javase/technologies/desktop/javabeans/jaf/index.jsp, https://repo1.maven.org/maven2/com/sun/activation/javax.activation)
 - JavaMail API (compat) (from http://kenai.com/projects/javamail)
 - javax.annotation API (from http://jcp.org/en/jsr/detail?id=250)
+- Streaming API for XML (from https://repo1.maven.org/maven2/javax/xml/stream/stax-api)
 
 ========================================================================
 CDDL-1.1
@@ -452,7 +466,6 @@ The following software have components provided under the terms of this license:
 - JUnit Vintage Engine (from http://junit.org/junit5/, https://junit.org/junit5/)
 - Jakarta Activation API (from https://github.com/eclipse-ee4j/jaf, https://github.com/jakartaee/jaf-api, https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api)
 - Jakarta Annotations API (from https://projects.eclipse.org/projects/ee4j.ca)
-- Jakarta Dependency Injection (from https://github.com/eclipse-ee4j/injection-api)
 - Jakarta Expression Language API (from https://projects.eclipse.org/projects/ee4j.el)
 - Jakarta Messaging API (from https://projects.eclipse.org/projects/ee4j.jms)
 - Jakarta Servlet (from https://projects.eclipse.org/projects/ee4j.servlet)
@@ -600,6 +613,7 @@ The following software have components provided under the terms of this license:
 - System Stubs JUnit4 (from https://github.com/webcompere/system-stubs/)
 - adal4j (from https://github.com/AzureAD/azure-activedirectory-library-for-java)
 - javamsalruntime (from https://github.com/AzureAD/microsoft-authentication-library-for-cpp)
+- jwks-rsa-java (from https://github.com/auth0/jwks-rsa-java)
 - micrometer-commons (from https://github.com/micrometer-metrics/micrometer)
 - micrometer-core (from https://github.com/micrometer-metrics/micrometer)
 - mockito-inline (from http://mockito.org, https://github.com/mockito/mockito)
@@ -607,6 +621,7 @@ The following software have components provided under the terms of this license:
 - msal4j (from https://github.com/AzureAD/microsoft-authentication-library-for-java)
 - msal4j-brokers (from https://github.com/AzureAD/microsoft-authentication-library-for-java)
 - msal4j-persistence-extension (from https://github.com/AzureAD/microsoft-authentication-extensions-for-java, https://github.com/AzureAD/microsoft-authentication-library-for-java)
+- redis-authx-core (from https://github.com/redis/redis-authx-core)
 
 ========================================================================
 MPL-2.0
@@ -649,6 +664,7 @@ cc-pd
 The following software have components provided under the terms of this license:
 
 - Netty/Codec (from http://netty.io/, https://repo1.maven.org/maven2/io/netty/netty-codec)
+- Netty/Codec/Base (from https://netty.io/)
 
 ========================================================================
 gpl-2.0-classpath
