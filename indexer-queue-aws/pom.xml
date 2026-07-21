@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.11</version>
+        <version>3.5.16</version>
         <relativePath></relativePath>
     </parent>
 
@@ -90,9 +90,8 @@
     <properties>
         <aws.version>1.12.738</aws.version>
         <deployment.environment>dev</deployment.environment>
-        <spring-webmvc.version>6.1.16</spring-webmvc.version>
-        <spring-core.version>6.2.11</spring-core.version>
-        <netty.version>4.1.124.Final</netty.version>
+        <spring-webmvc.version>6.2.19</spring-webmvc.version>
+        <spring-core.version>6.2.19</spring-core.version>
         <json-smart.version>2.5.2</json-smart.version>
     </properties>
 
@@ -104,24 +103,16 @@
                 <version>${spring-core.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-common</artifactId>
-                <version>${netty.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-handler</artifactId>
-                <version>${netty.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-codec-http2</artifactId>
-                <version>${netty.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>net.minidev</groupId>
                 <artifactId>json-smart</artifactId>
                 <version>${json-smart.version}</version>
+            </dependency>
+            <!-- CVE-2025-67030: plexus-utils directory traversal in Expand.extractFile; fixed in 4.0.0+.
+                 Overrides the 3.3.0 pulled transitively via maven-compiler-plugin. -->
+            <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-utils</artifactId>
+                <version>4.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -134,13 +125,12 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
-            <version>6.3.8</version>
         </dependency>
         <!-- Internal packages -->
         <dependency>
             <groupId>org.opengroup.osdu.core.aws</groupId>
             <artifactId>os-core-lib-aws</artifactId>
-            <version>5.1.0</version>
+            <version>8.0.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -154,7 +144,23 @@
                     <groupId>org.springframework.security</groupId>
                     <artifactId>spring-security-crypto</artifactId>
                 </exclusion>
+                <!-- CVE-2025-58057: os-core-common transitively pulls lettuce-core 6.6.0 (< 7.5.2 floor).
+                     indexer-queue-aws uses the core.aws.v2.* API and does not exercise the RedisCache
+                     path, so lettuce-core is unused here. Exclude the vulnerable transitive to remove
+                     the CVE surface entirely rather than carry an unused dependency. -->
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- os-core-lib-aws wave0 SNAPSHOT no longer exports spring-boot-autoconfigure at compile
+             scope (5.1.0 leaked it transitively); this Spring Boot app needs it directly for
+             @SpringBootApplication/SpringApplication. Version managed by spring-boot-starter-parent. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
