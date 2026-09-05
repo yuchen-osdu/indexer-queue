@@ -12,10 +12,6 @@ analyze:
       type: mvn
       target: pom.xml
       path: .
-    - name: indexer-queue-aws
-      type: mvn
-      target: indexer-queue-aws/pom.xml
-      path: .
     - name: indexer-queue-ibm
       type: mvn
       target: indexer-queue-ibm/pom.xml
