@@ -1,13 +1,4 @@
 variables:
-  AWS_BUILD_SUBDIR: indexer-queue-aws/build-aws
-  AWS_TEST_SUBDIR: indexer-queue-aws
-  AWS_CHART_SUBDIR: devops/aws/chart
-  AWS_SERVICE: indexer-queue
-  AWS_SERVICE_GATEWAY: osdu-gateway
-  AWS_ENVIRONMENT: dev
-  AWS_DEPLOY_TARGET: TF
-  AWS_EKS_DEPLOYMENT_NAME: indexer-queue
-
   AZURE_SERVICE: indexer-queue
   AZURE_BUILD_SUBDIR: indexer-queue-azure-enqueue
   AZURE_TEST_SUBDIR: testing/indexer-queue-azure-enqueue
@@ -34,12 +25,6 @@ include:
 
   - project: "osdu/platform/ci-cd-pipelines"
     file: "scanners/gitlab-ultimate.yml"
-
-  - project: "osdu/platform/ci-cd-pipelines"
-    file: "cloud-providers/aws-global.yml"
-
-  - project: "osdu/platform/ci-cd-pipelines"
-    file: "cloud-providers/aws-maven.yml"
 
   - project: "osdu/platform/ci-cd-pipelines"
     file: "cloud-providers/azure.yml"
@@ -155,9 +140,6 @@ azure_containerize:
 
 azure_test:
   image: community.opengroup.org:5555/osdu/platform/deployment-and-operations/base-containers-azure/azure-maven17:v0.0.1
-
-aws-test-java:
-  image: $CI_REGISTRY/osdu/platform/deployment-and-operations/base-containers-aws/aws-maven/aws-maven:v2.0
 
 fossa-analyze:
   image: $CI_REGISTRY/divido/fossa-with-cache:v0.9-jdk17
