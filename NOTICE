@@ -137,7 +137,7 @@ The following software have components provided under the terms of this license:
 - Objenesis (from https://objenesis.org/, https://repo1.maven.org/maven2/org/objenesis/objenesis)
 - OkHttp (from https://lysine.dev/okhttp/, https://repo1.maven.org/maven2/com/squareup/okhttp3/okhttp, https://square.github.io/okhttp/)
 - OkHttp Logging Interceptor (from https://github.com/square/okhttp, https://lysine.dev/okhttp/, https://repo1.maven.org/maven2/com/squareup/okhttp3/logging-interceptor, https://square.github.io/okhttp/)
-- OkHttp URLConnection (from https://repo1.maven.org/maven2/com/squareup/okhttp3/okhttp-urlconnection, https://square.github.io/okhttp/)
+- OkHttp URLConnection (from https://lysine.dev/okhttp/, https://repo1.maven.org/maven2/com/squareup/okhttp3/okhttp-urlconnection, https://square.github.io/okhttp/)
 - Okio (from https://github.com/lysine-dev/okio/, https://github.com/square/okio/, https://repo1.maven.org/maven2/com/squareup/okio/okio)
 - OpenCensus (from https://github.com/census-instrumentation/opencensus-java)
 - OpenTelemetry Java (from https://github.com/open-telemetry/opentelemetry-java)
@@ -223,7 +223,7 @@ The following software have components provided under the terms of this license:
 - micrometer-core (from https://github.com/micrometer-metrics/micrometer, https://github.com/micrometer-metrics/micrometer-commercial)
 - micrometer-jakarta9 (from https://github.com/micrometer-metrics/micrometer-commercial)
 - micrometer-observation (from https://github.com/micrometer-metrics/micrometer-commercial)
-- micrometer-registry-azure-monitor (from https://github.com/micrometer-metrics/micrometer)
+- micrometer-registry-azure-monitor (from https://github.com/micrometer-metrics/micrometer, https://github.com/micrometer-metrics/micrometer-commercial)
 - org.apiguardian:apiguardian-api (from https://github.com/apiguardian-team/apiguardian)
 - org.opentest4j:opentest4j (from https://github.com/ota4j-team/opentest4j)
 - org.xmlunit:xmlunit-core (from http://www.xmlunit.org/, https://www.xmlunit.org/)
@@ -245,7 +245,6 @@ BSD-2-Clause
 The following software have components provided under the terms of this license:
 
 - Apache Log4j Core (from https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core)
-- Hamcrest Core (from http://hamcrest.org/, http://hamcrest.org/JavaHamcrest/, https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core)
 - HdrHistogram (from http://hdrhistogram.github.io/HdrHistogram/)
 - Jackson-core (from http://wiki.fasterxml.com/JacksonHome, https://github.com/FasterXML/jackson-core)
 - Jodd Util (from https://util.jodd.org/)
@@ -539,6 +538,7 @@ MPL-2.0
 ========================================================================
 The following software have components provided under the terms of this license:
 
+- Asynchronous Http Client (from https://github.com/AsyncHttpClient/async-http-client, https://repo1.maven.org/maven2/org/asynchttpclient/async-http-client)
 - RabbitMQ Java Client (from http://www.rabbitmq.com, https://www.rabbitmq.com)
 
 ========================================================================
@@ -592,7 +592,6 @@ The following software have components provided under the terms of this license:
 - AOP alliance (from http://aopalliance.sourceforge.net)
 - JAX-RS 2.1: The Java(TM) API for RESTful Web Services (from http://www.jboss.org/, https://repo1.maven.org/maven2/org/jboss/spec/javax/ws/rs/jboss-jaxrs-api_2.1_spec)
 - JBoss Jakarta Annotations API (from <https://github.com/jboss/jboss-jakarta-annotations-api_spec>, https://github.com/jboss/jboss-jakarta-annotations-api_spec)
-- JBoss Logging 3 (from http://www.jboss.org, https://www.jboss.org/)
 - JSON in Java (from https://github.com/douglascrockford/JSON-java)
 - RESTEasy Client API (from https://resteasy.dev/)
 - RESTEasy Core (from https://resteasy.dev/)
