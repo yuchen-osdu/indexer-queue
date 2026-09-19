@@ -33,7 +33,7 @@
 
   <properties>
     <!-- Core Dependencies -->
-    <core-lib-azure.version>3.0.0</core-lib-azure.version>
+    <core-lib-azure.version>3.0.4</core-lib-azure.version>
     <!-- Project Versions -->
     <azure-ad-starter.version>3.0.0</azure-ad-starter.version>
     <msal4j.version>1.17.3</msal4j.version>
@@ -41,13 +41,30 @@
     <nimbus-jose.version>9.47</nimbus-jose.version>
     <!-- Test Dependency Versions -->
     <powermock.version>2.0.9</powermock.version>
-    <log4j.version>2.24.3</log4j.version>
+    <netty.version>4.2.17.Final</netty.version>
+    <opentelemetry.version>1.62.0</opentelemetry.version>
+    <async-http-client.version>2.16.1</async-http-client.version>
+    <okio.version>1.17.6</okio.version>
      <!-- Plugin Versions -->
     <jacoco.version>0.8.11</jacoco.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>${netty.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>org.opengroup.osdu</groupId>
         <artifactId>core-lib-azure</artifactId>
@@ -60,12 +77,31 @@
         <artifactId>nimbus-jose-jwt</artifactId>
         <version>${nimbus-jose.version}</version>
       </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>10.1.34</version>
-            <scope>compile</scope>
-        </dependency>
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-api</artifactId>
+        <version>${opentelemetry.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-context</artifactId>
+        <version>${opentelemetry.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.asynchttpclient</groupId>
+        <artifactId>async-http-client</artifactId>
+        <version>${async-http-client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.asynchttpclient</groupId>
+        <artifactId>async-http-client-netty-utils</artifactId>
+        <version>${async-http-client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.squareup.okio</groupId>
+        <artifactId>okio</artifactId>
+        <version>${okio.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
