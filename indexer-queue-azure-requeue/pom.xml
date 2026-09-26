@@ -19,14 +19,14 @@
     <parent>
         <artifactId>indexer-queue</artifactId>
         <groupId>org.opengroup.osdu.indexerqueue</groupId>
-        <version>0.30.0-SNAPSHOT</version>
+        <version>0.31.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.opengroup.osdu.indexerqueue</groupId>
     <artifactId>RequeueFunction</artifactId>
-    <version>0.30.0-SNAPSHOT</version>
+    <version>0.31.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -45,7 +45,7 @@
         <azure.functions.topicname />
         <azure.functions.subscriptionname />
         <azure.functions.indexerqueuekey />
-        <logback.version>1.4.14</logback.version>
+        <logback.version>1.5.34</logback.version>
     </properties>
 
     <pluginRepositories>
@@ -64,6 +64,20 @@
 
     <dependencyManagement>
         <dependencies>
+          <dependency>
+            <groupId>com.fasterxml.jackson</groupId>
+            <artifactId>jackson-bom</artifactId>
+            <version>${jackson.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
+          <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-bom</artifactId>
+            <version>${netty.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
           <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-dependencies</artifactId>
@@ -120,12 +134,10 @@
         <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-core</artifactId>
-          <version>${jackson.version}</version>
         </dependency>
         <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-annotations</artifactId>
-          <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
