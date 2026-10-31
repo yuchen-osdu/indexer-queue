@@ -1,0 +1,365 @@
+{
+  "$comment": "Template-owned schema for the fork-owned service descriptor at .spi/service.yaml (ADR-039). Consumed by descriptor.py; it is a restricted dialect with closed mappings except where keyPattern plus additionalProperties explicitly declares a dynamic map.",
+  "schemaVersion": 2,
+  "supportedSchemaVersions": [2],
+  "deprecatedSchemaVersions": [1],
+  "reservedEnvironmentIdentifiers": [
+    "PATH",
+    "HOME",
+    "SHELL",
+    "PWD",
+    "OLDPWD",
+    "BASH_ENV",
+    "ENV",
+    "LD_PRELOAD",
+    "LD_LIBRARY_PATH",
+    "PYTHONPATH",
+    "JAVA_TOOL_OPTIONS",
+    "MAVEN_OPTS",
+    "GITHUB_ENV",
+    "GITHUB_OUTPUT",
+    "GITHUB_PATH",
+    "GITHUB_STEP_SUMMARY",
+    "GITHUB_TOKEN",
+    "AZURE_CLIENT_ID",
+    "AZURE_TENANT_ID",
+    "AZURE_SUBSCRIPTION_ID",
+    "AZURE_FEDERATED_TOKEN_FILE",
+    "ACTIONS_ID_TOKEN_REQUEST_URL",
+    "ACTIONS_ID_TOKEN_REQUEST_TOKEN"
+  ],
+  "reservedEnvironmentPrefixes": ["GITHUB_", "RUNNER_", "ACTIONS_"],
+  "archetypes": {
+    "java-maven-azure": {
+      "description": "Conventional OSDU Java service built with Maven and the Azure provider profile set.",
+      "lane": "java",
+      "laneImplemented": true,
+      "defaults": {
+        "dockerfileProfile": "java",
+        "unitTestType": "maven",
+        "coverage": "jacoco"
+      }
+    },
+    "python-uv-fastapi": {
+      "description": "Python service managed with uv and a committed uv.lock, served by FastAPI/uvicorn.",
+      "lane": "python",
+      "laneImplemented": true,
+      "requiredKeys": ["container.appModule"],
+      "defaults": {
+        "dockerfileProfile": "python",
+        "unitTestType": "pytest",
+        "coverage": "pytest-cov",
+        "runtimeVersion": "3.12"
+      }
+    }
+  },
+  "forbiddenKeys": [
+    "action",
+    "actions",
+    "aks",
+    "azure",
+    "azureClientId",
+    "cluster",
+    "command",
+    "containerName",
+    "credentials",
+    "deployment",
+    "deploymentName",
+    "entrypoint",
+    "env",
+    "environment",
+    "identity",
+    "image",
+    "kubernetes",
+    "namespace",
+    "password",
+    "permissions",
+    "registry",
+    "run",
+    "runsOn",
+    "script",
+    "secret",
+    "secrets",
+    "shell",
+    "subscription",
+    "tenant",
+    "token",
+    "uses",
+    "with",
+    "workflow"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "required": true
+    },
+    "service": {
+      "type": "mapping",
+      "required": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "pattern": "^[a-z0-9][a-z0-9-]{0,62}$"
+        },
+        "archetype": {
+          "type": "string",
+          "required": true,
+          "enum": ["java-maven-azure", "python-uv-fastapi"]
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200
+        }
+      }
+    },
+    "build": {
+      "type": "mapping",
+      "properties": {
+        "mavenProfiles": {
+          "type": "list",
+          "archetypes": ["java-maven-azure"],
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+          }
+        },
+        "artifact": {
+          "type": "mapping",
+          "archetypes": ["java-maven-azure"],
+          "properties": {
+            "discovery": {
+              "type": "string",
+              "enum": ["spring-boot-azure"]
+            },
+            "path": {
+              "$comment": "Repository-relative glob used to select the built service JAR. It is emitted as data, never as a shell command.",
+              "type": "repositoryGlob",
+              "maxLength": 160
+            }
+          }
+        },
+        "python": {
+          "type": "mapping",
+          "archetypes": ["python-uv-fastapi"],
+          "properties": {
+            "runtimeVersion": {
+              "type": "string",
+              "enum": ["3.12"]
+            },
+            "compatibilityVersions": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "enum": ["3.11", "3.13"]
+              }
+            },
+            "packageManager": {
+              "type": "string",
+              "enum": ["uv"]
+            },
+            "buildBackend": {
+              "type": "string",
+              "enum": ["setuptools", "hatchling", "poetry-core", "flit-core"]
+            },
+            "lockfile": {
+              "type": "path",
+              "maxLength": 120
+            },
+            "distribution": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+            },
+            "importPackage": {
+              "type": "string",
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,63}$"
+            },
+            "testExtras": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              }
+            },
+            "runtimeExtras": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tests": {
+      "type": "mapping",
+      "properties": {
+        "unit": { "$ref": "unitTestSuite" },
+        "serviceInProcess": {
+          "$ref": "serviceTestSuite",
+          "archetypes": ["python-uv-fastapi"]
+        },
+        "serviceSubprocess": {
+          "$ref": "serviceTestSuite",
+          "archetypes": ["python-uv-fastapi"]
+        },
+        "acceptance": {
+          "$ref": "acceptanceTestSuite"
+        }
+      }
+    },
+    "container": {
+      "type": "mapping",
+      "properties": {
+        "dockerfileProfile": {
+          "type": "string",
+          "enum": ["java", "python"]
+        },
+        "appModule": {
+          "$comment": "ASGI target baked into the canonical Python image (uvicorn <module>:<attribute>). Deliberately stricter than a free-form string: dotted import path, a single colon, and a plain attribute name only, so the value can never carry shell metacharacters, spaces or options into a build argument.",
+          "type": "string",
+          "archetypes": ["python-uv-fastapi"],
+          "maxLength": 120,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*:[A-Za-z_][A-Za-z0-9_]*$"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "environmentIdentifier": {
+      "type": "string",
+      "environmentIdentifier": true,
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,127}$"
+    },
+    "unitTestSuite": {
+      "type": "mapping",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["maven", "pytest", "postman"]
+        },
+        "path": {
+          "type": "path",
+          "archetypes": ["python-uv-fastapi"],
+          "maxLength": 120
+        },
+        "coverage": {
+          "type": "coverage"
+        }
+      }
+    },
+    "serviceTestSuite": {
+      "type": "mapping",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["pytest"]
+        },
+        "path": {
+          "type": "path",
+          "maxLength": 120
+        }
+      }
+    },
+    "acceptanceTestSuite": {
+      "type": "mapping",
+      "properties": {
+        "type": {
+          "type": "string",
+          "required": true,
+          "enum": ["maven", "python"]
+        },
+        "path": {
+          "$comment": "Working directory for the live suite. The workflow joins it to GITHUB_WORKSPACE after path validation.",
+          "type": "path",
+          "required": true,
+          "maxLength": 120
+        },
+        "runnerPath": {
+          "$comment": "Repository-relative Python file implementing the TEST_REPO_ROOT/TEST_RESULTS_DIR contract. It is executed as argv, never through eval or a caller-provided shell command.",
+          "type": "path",
+          "archetypes": ["python-uv-fastapi"],
+          "required": true,
+          "maxLength": 120
+        },
+        "mavenArguments": {
+          "$comment": "Individual Maven argv tokens. A workflow must pass the decoded list directly to Maven and must never evaluate it as a shell string.",
+          "type": "list",
+          "archetypes": ["java-maven-azure"],
+          "default": ["verify"],
+          "items": {
+            "type": "string",
+            "maxLength": 240,
+            "pattern": "^[^\\s\\x00-\\x1F\\x7F]+$"
+          }
+        },
+        "rootTokenEnv": {
+          "$ref": "environmentIdentifier",
+          "default": "ROOT_USER_TOKEN"
+        },
+        "noDataAccessTokenEnv": {
+          "$ref": "environmentIdentifier"
+        },
+        "bindings": {
+          "type": "mapping",
+          "keyPattern": "^[A-Za-z_][A-Za-z0-9_]{0,127}$",
+          "keyEnvironmentIdentifier": true,
+          "additionalProperties": {
+            "type": "mapping",
+            "properties": {
+              "source": {
+                "type": "string",
+                "required": true,
+                "enum": ["gateway", "partition", "entitlementDomain", "storageAccount", "literal"]
+              },
+              "suffix": {
+                "type": "string",
+                "maxLength": 200,
+                "pattern": "^[A-Za-z0-9._~:/@+-]+$"
+              },
+              "value": {
+                "type": "string",
+                "maxLength": 240,
+                "pattern": "^[A-Za-z0-9._~:/@+-]+$"
+              }
+            }
+          }
+        },
+        "keyVaultBindings": {
+          "$comment": "Maps an environment variable to an Azure Key Vault secret name. Secret values are never represented in the descriptor.",
+          "type": "mapping",
+          "keyPattern": "^[A-Za-z_][A-Za-z0-9_]{0,127}$",
+          "keyEnvironmentIdentifier": true,
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 127,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,126}$"
+          }
+        },
+        "dependencies": {
+          "type": "mapping",
+          "keyPattern": "^[a-z0-9][a-z0-9-]{0,62}$",
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 200,
+            "pattern": "^/[A-Za-z0-9._~/-]*$"
+          }
+        },
+        "timeoutMinutes": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1,
+          "maximum": 180
+        },
+        "maxAttempts": {
+          "type": "integer",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 5
+        }
+      }
+    }
+  },
+  "coverageValues": ["jacoco", "cobertura", "pytest-cov", "none"]
+}
