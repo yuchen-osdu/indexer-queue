@@ -14,11 +14,6 @@
         "description": "Fork-specific templates and configuration that get copied during sync updates"
       },
       {
-        "path": "build",
-        "sync_all": true,
-        "description": "Canonical service Dockerfile owned by the engineering system, synced to every fork (ADR-037)"
-      },
-      {
         "path": ".github/rulesets",
         "sync_all": true,
         "description": "Branch-protection rulesets reconciled by settings-apply.yml"
@@ -27,6 +22,11 @@
         "path": ".github/scripts/settings-apply",
         "sync_all": true,
         "description": "Durable settings-reconciliation helpers called by settings-apply.yml"
+      },
+      {
+        "path": ".github/scripts/service-config",
+        "sync_all": true,
+        "description": "Service-descriptor schema, parser and generators owned by the engineering system (ADR-039)"
       }
     ],
     "files": [
@@ -49,6 +49,30 @@
       {
         "path": ".github/security-patterns.txt",
         "description": "Security scanning patterns"
+      },
+      {
+        "path": ".github/scripts/filter_upstream_history.py",
+        "description": "Explicit deterministic upstream-history filter used by initialization and sync"
+      },
+      {
+        "path": "build/Dockerfile",
+        "description": "Canonical Java service Dockerfile owned by the engineering system"
+      },
+      {
+        "path": "build/docker-entrypoint.sh",
+        "description": "Canonical Java service container entrypoint"
+      },
+      {
+        "path": "build/python/Dockerfile",
+        "description": "Canonical Python service Dockerfile owned by the engineering system"
+      },
+      {
+        "path": "build/python/Dockerfile.dockerignore",
+        "description": "Canonical Python build-context exclusions"
+      },
+      {
+        "path": "build/python/docker-entrypoint.sh",
+        "description": "Canonical Python service container entrypoint"
       }
     ],
     "workflows": {
@@ -105,6 +129,10 @@
         {
           "path": ".github/template-workflows/oidc-smoke-test.yml",
           "description": "Operator-run OIDC federated-credential smoke test (Phase 0 step 4a; branch/tag subjects)"
+        },
+        {
+          "path": ".github/template-workflows/restore-deployment.yml",
+          "description": "Operator break-glass rollback of a service Deployment to a previous-good digest (ADR-032 §8.9)"
         }
       ],
       "template_only": [
@@ -143,8 +171,22 @@
   "exclusions": [
     ".github/copilot-instructions.md",
     ".github/local-actions",
-    "CODEOWNERS"
+    "CODEOWNERS",
+    ".spi"
   ],
+  "service_owned": {
+    "description": "Fork-owned paths that template-sync must never create, overwrite or delete (ADR-039)",
+    "paths": [
+      {
+        "path": ".spi/service.yaml",
+        "reason": "Service descriptor: build archetype and non-privileged build/test metadata owned by the service repository"
+      },
+      {
+        "path": "CODEOWNERS",
+        "reason": "Fork-owned ownership rules, seeded during initialization so /.spi/ requires an engineering-system reviewer"
+      }
+    ]
+  },
   "cleanup_rules": {
     "description": "Files and directories to remove during repository initialization",
     "directories": [
@@ -180,7 +222,47 @@
       },
       {
         "path": "CODEOWNERS",
-        "reason": "Template-specific code owners - fork instances define their own ownership"
+        "reason": "Template-specific code owners removed, then re-seeded with a fork-owned /.spi/ ownership rule during initialization (ADR-039)"
+      },
+      {
+        "path": "tests/test_docker_build_modes.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_python_build_contracts.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_python_build_plan.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_integration_test_runners.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_aks_deploy_contracts.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_service_config_workflows.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_service_descriptor.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_service_descriptor_init.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_workflow_summaries.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
+      },
+      {
+        "path": "tests/test_upstream_history_filter.py",
+        "reason": "Template-development test; fork instances retain only upstream service tests"
       },
       {
         "path": ".github/ISSUE_TEMPLATE/branch-protection-reminder.md",
